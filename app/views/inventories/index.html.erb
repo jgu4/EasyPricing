@@ -1,0 +1,118 @@
+<div>
+  <div>
+    <h1>
+      List of all inventories
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new inventory
+    </h2>
+
+    <form action="/insert_inventory" method="post">
+      <div>
+        <label for="item_id_box">
+          Item
+        </label>
+
+        <input type="text" id="item_id_box" name="query_item_id">
+      </div>
+
+      <div>
+        <label for="store_id_box">
+          Store
+        </label>
+
+        <input type="text" id="store_id_box" name="query_store_id">
+      </div>
+
+      <div>
+        <label for="price_result_box">
+          Price result
+        </label>
+
+        <input type="text" id="price_result_box" name="query_price_result">
+      </div>
+
+      <button>
+        Create inventory
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Item
+        </th>
+
+        <th>
+          Store
+        </th>
+
+        <th>
+          Price result
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_inventories.each do |an_inventory| %>
+      <tr>
+        <td>
+          <%= an_inventory.id %>
+        </td>
+
+        <td>
+          <%= an_inventory.item_id %>
+        </td>
+
+        <td>
+          <%= an_inventory.store_id %>
+        </td>
+
+        <td>
+          <%= an_inventory.price_result %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_inventory.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_inventory.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/inventories/<%= an_inventory.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

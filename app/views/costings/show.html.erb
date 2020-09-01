@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      Costing #<%= @the_costing.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/costings">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_costing/<%= @the_costing.id %>">
+          Delete costing
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Cost value
+      </dt>
+      <dd>
+        <%= @the_costing.cost_value %>
+      </dd>
+
+      <dt>
+        Item
+      </dt>
+      <dd>
+        <%= @the_costing.item_id %>
+      </dd>
+
+      <dt>
+        Costing type
+      </dt>
+      <dd>
+        <%= @the_costing.costing_type %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_costing.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_costing.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit costing
+    </h2>
+
+    <form action="/modify_costing/<%= @the_costing.id %>"  method="post" >
+
+
+      <div>
+        <label for="item_id_box">
+          Item Number
+        </label>
+
+        <input type="text" id="item_id_box" name="query_item_id" value="<%= @the_costing.item_id %>">
+      </div>
+
+      <div>
+        <label for="cost_value_box">
+          Cost value ($)
+        </label>
+
+        <input type="text" id="cost_value_box" name="query_cost_value" value="<%= @the_costing.cost_value %>">
+      </div>
+      <div>
+        <label for="costing_type_box">
+          Costing type
+        </label>
+
+        <input type="text" id="costing_type_box" name="query_costing_type" value="<%= @the_costing.costing_type %>">
+      </div>
+
+      <button>
+        Update costing
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

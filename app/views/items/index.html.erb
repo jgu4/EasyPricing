@@ -1,0 +1,166 @@
+<div>
+  <div>
+    <h1>
+      List of price points for all items 
+    </h1>
+  </div>
+</div>
+
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>          ID        </th>
+        <th>          Item number        </th>
+        <th>          Item description        </th>
+        <th>          Cost ($)        </th>
+        <%# <th>          User        </th> %>
+        <th>          Classification        </th>
+        <th>          Store        </th>
+        <th>          List Price ($)        </th>
+        <th>          Created at        </th>
+        <th>          Updated at        </th>
+        <th>        </th>      </tr>
+
+      <% @list_of_items.each do |an_item| %>
+      <tr>
+        <td>
+          <%= an_item.id %>
+        </td>
+
+        <td>
+          <%= an_item.item_number %>
+        </td>
+
+        <td>
+          <%= an_item.item_description %>
+        </td>
+
+        <td>
+          <%= an_item.costing.cost_value %>
+        </td>
+
+        <td>
+          <%= an_item.classification.family_description %> 
+        </td>
+
+        <td>
+          <%# <%= Inventory.where({:item_id=>an_item.id}).at(0) %> 
+          <%# <%= an_item.inventories.at(0)  %> 
+           <%= an_item.inventories.at(0).store_add.store_name  %>
+        </td>
+
+        <td>
+           <% store_id_factor=Inventory.where({:item_id=>an_item.id}).at(0).store_id%>
+           <% store_factor=Store.where({:id=>store_id_factor}).at(0).store_rule%>
+        
+           <% price=an_item.costing.cost_value * an_item.classification.rule.to_f * store_factor.to_f  %>
+           <%= price.round(2)%>
+
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_item.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_item.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/items/<%= an_item.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Add a new item (note: select Classification and Store from the drop-down list)
+    </h2>
+
+    <form action="/insert_item" method="post">
+      <div>
+        <label for="item_number_box">
+          Item number
+        </label>
+
+        <input type="text" id="item_number_box" name="query_item_number">
+      </div>
+
+      <div>
+        <label for="item_description_box">
+          Item description
+        </label>
+
+        <input type="text" id="item_description_box" name="query_item_description">
+      </div>
+
+      <div>
+        <label for="cost_value_box">
+          Cost ($)
+        </label>
+
+        <input type="float" id="cost_value_box" name="query_cost_value">
+      </div>
+
+      <%# <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div> %>
+
+      <div>
+
+        <%# <form action="/items"> %>
+        <label for="classification_id_box">Classification</label>         
+        <select id="classification_id_box" name="query_classification_id">
+          <% Classification.all.each do |classi| %>
+            <option value="<%= classi.id %>">
+              <%= classi.family_description %>
+            </option>
+          <% end %>
+        </select>
+        <%# <input type="submit" value="Confirm"> %>
+        <%# </form> %>
+
+      </div>
+
+
+
+      <div>
+
+      <%# <form action="/items"> %>
+        <label for="store_id_box">Store</label> 
+        
+        <select id="store_id_box" name="query_store_id">
+          <% Store.all.each do |store| %>
+            <option value="<%= store.id %>">
+              <%= store.store_name %>
+            </option>
+          <% end %>
+        </select>
+        <%# <input type="submit" value="Confirm"> %>
+      <%# </form> %>
+
+      </div>
+
+      <button>
+        Create item
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

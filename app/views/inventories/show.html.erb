@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Inventory #<%= @the_inventory.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/inventories">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_inventory/<%= @the_inventory.id %>">
+          Delete inventory
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Item
+      </dt>
+      <dd>
+        <%= @the_inventory.item_id %>
+      </dd>
+
+      <dt>
+        Store
+      </dt>
+      <dd>
+        <%= @the_inventory.store_id %>
+      </dd>
+
+      <dt>
+        Price result
+      </dt>
+      <dd>
+        <%= @the_inventory.price_result %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_inventory.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_inventory.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit inventory
+    </h2>
+
+    <form action="/modify_inventory/<%= @the_inventory.id %>"  method="post" >
+      <div>
+        <label for="item_id_box">
+          Item
+        </label>
+
+        <input type="text" id="item_id_box" name="query_item_id" value="<%= @the_inventory.item_id %>">
+      </div>
+
+      <div>
+        <label for="store_id_box">
+          Store
+        </label>
+
+        <input type="text" id="store_id_box" name="query_store_id" value="<%= @the_inventory.store_id %>">
+      </div>
+
+      <div>
+        <label for="price_result_box">
+          Price result
+        </label>
+
+        <input type="text" id="price_result_box" name="query_price_result" value="<%= @the_inventory.price_result %>">
+      </div>
+
+      <button>
+        Update inventory
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

@@ -1,0 +1,104 @@
+<div>
+  <div>
+    <h1>
+      List of all stores
+    </h1>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border = "1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Store name
+        </th>
+
+        <th>
+          Store factor
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        See menu offered by the store
+        </th>
+      </tr>
+
+      <% @list_of_stores.each do |a_store| %>
+      <tr>
+        <td>
+          <%= a_store.id %>
+        </td>
+
+        <td>
+          <%= a_store.store_name %>
+        </td>
+
+        <td>
+          <%= a_store.store_rule %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_store.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_store.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/stores/<%= a_store.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new store
+    </h2>
+
+    <form action="/insert_store" method="post">
+      <div>
+        <label for="store_name_box">
+          Store name
+        </label>
+
+        <input type="text" id="store_name_box" name="query_store_name">
+      </div>
+
+      <div>
+        <label for="store_rule_box">
+          Store pricing factor
+        </label>
+
+        <input type="text" id="store_rule_box" name="query_store_rule">
+      </div>
+
+      <button>
+        Create store
+      </button>
+    </form>
+  </div>
+</div>

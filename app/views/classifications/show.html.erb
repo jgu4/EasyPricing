@@ -1,0 +1,127 @@
+<div>
+  <div>
+    <h1>
+      Classification #<%= @the_classification.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/classifications">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_classification/<%= @the_classification.id %>">
+          Delete classification
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Family description:
+      </dt>
+      <dd>
+        <%= @the_classification.family_description %>
+      </dd>
+
+      <dt>
+        Pricing factor:
+      </dt>
+      <dd>
+        <%= @the_classification.rule %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_classification.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_classification.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit classification
+    </h2>
+
+    <form action="/modify_classification/<%= @the_classification.id %>"  method="post" >
+      <div>
+        <label for="family_description_box">
+          Family description
+        </label>
+
+        <input type="text" id="family_description_box" name="query_family_description" value="<%= @the_classification.family_description %>">
+      </div>
+
+      <div>
+        <label for="rule_box">
+          Pricing factor
+        </label>
+
+        <input type="text" id="rule_box" name="query_rule" value="<%= @the_classification.rule %>">
+      </div>
+
+      <button>
+        Update classification
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+
+  <div>
+    <h2>      All items assigned to this classification    </h2>
+
+
+<table border="1">
+  <tr>
+    <th>      Item number    </th>
+
+    <th>      Item description    </th>
+
+    <th>      Cost ($)    </th>
+
+    <th>      Classification check    </th>
+  </tr>
+
+ <% @the_classification.items.each do |item| %>
+  <tr>
+
+    <td>
+      <%= item.item_number %>
+    </td>
+
+    <td>
+      <%= item.item_description %>
+    </td>
+
+    <td>
+      <%=  item.costing.cost_value%>
+    </td>
+    
+    <td>
+      <%=  item.classification.family_description%>
+    </td>
+
+  </tr>
+
+  <% end %>
+
+</table>
+  <hr>

@@ -1,0 +1,126 @@
+<div>
+  <div>
+    <h1>
+      Store #<%= @the_store.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/stores">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_store/<%= @the_store.id %>">
+          Delete store
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Store name
+      </dt>
+      <dd>
+        <%= @the_store.store_name %>
+      </dd>
+
+      <dt>
+        Store rule
+      </dt>
+      <dd>
+        <%= @the_store.store_rule %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_store.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_store.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit store
+    </h2>
+
+    <form action="/modify_store/<%= @the_store.id %>"  method="post" >
+      <div>
+        <label for="store_name_box">
+          Store name
+        </label>
+
+        <input type="text" id="store_name_box" name="query_store_name" value="<%= @the_store.store_name %>">
+      </div>
+
+      <div>
+        <label for="store_rule_box">
+          Store rule
+        </label>
+
+        <input type="text" id="store_rule_box" name="query_store_rule" value="<%= @the_store.store_rule %>">
+      </div>
+
+      <button>
+        Update store
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+    <h2>      Menu items in the selected store    </h2>
+
+
+<table border="1">
+  <tr>
+    <th>       Item number    </th>
+    <th>      Item description    </th>
+    <th>      Cost ($)    </th>
+    <th>       Classification     </th>
+    <th>      Store check    </th>
+  </tr>
+
+<% @the_store.inventories.each do |an_inv| %>
+      <tr>
+        <td>
+          <%= an_inv.item.item_number %>
+        </td>
+
+        <td>
+          <%= an_inv.item.item_description %>
+        </td>
+
+        <td>
+          <%= an_inv.item.costing.cost_value %>
+        </td>
+
+        <td>
+          <%= an_inv.item.classification.family_description %>
+        </td>
+
+        <td>
+          <%= @the_store.store_name %>
+        </td>
+
+  
+      </tr>
+      <% end %>

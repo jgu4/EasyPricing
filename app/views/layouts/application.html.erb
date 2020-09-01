@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FinalProject</title>
+    <title>EasyPricing</title>
     <%= csrf_meta_tags %>
 
     <!-- Expand the number of characters we can use in the document beyond basic ASCII 🎉 -->
@@ -16,6 +16,51 @@
   </head>
 
   <body>
+
+      <nav>
+      <ul>
+
+        <% if @current_user==nil %>
+        <li><a href="/">Home</a></li>
+        <li><a href="/user_sign_in">User Sign In</a></li>
+        <li><a href="/user_sign_up">User Sign Up<a/></li>
+        <%# <li><a href="/user_sign_Out">User Sign Out<a/></li>
+        <li><a href="/items">Item Price Management<a/></li>
+        <li><a href="/classifications">Classification<a/></li>
+        <li><a href="/stores">Stores<a/></li>
+        <li><a href="/costings">Cost<a/></li> %>
+
+        <% else%>
+        <%# <li><a href="/user_sign_up">User Sign Up<a/></li>
+        <li><a href="/user_sign_In">User Sign In</a></li> %>
+        <div> *** User ***
+        <li>
+          <a>Current Signed-in User Name: <%= @current_user.email%></a>
+        </li>
+        <li><a href="/user_sign_out">User Sign Out<a/></li>
+        <li>Registered User List (TBD)<a/></li>
+        </div>
+
+        <hr></hr>
+        <div> *** Main Pricing Page ***
+        <li><a href="/items">Item Price Publisher<a/></li>
+        </div>
+        
+        <hr></hr>
+        <div>*** Pricing Input Administration ***
+        <li><a href="/classifications">Classification<a/></li>
+        <li><a href="/stores">Stores<a/></li>
+        <li><a href="/costings">Cost<a/></li>
+        </div>
+        <% end %>
+      </ul>
+
+      </nav>
+
+      <p style="color: green"><%= notice%></p>
+      <p style="color: red"><%= alert %></p>
+
+
     <%= yield %>
   </body>
 </html>

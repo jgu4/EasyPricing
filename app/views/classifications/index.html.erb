@@ -1,0 +1,104 @@
+<div>
+  <div>
+    <h1>
+      List of all classifications
+    </h1>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border = "1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Family description
+        </th>
+
+        <th>
+          Classification factor
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        See items assigned to this classification
+        </th>
+      </tr>
+
+      <% @list_of_classifications.each do |a_classification| %>
+      <tr>
+        <td>
+          <%= a_classification.id %>
+        </td>
+
+        <td>
+          <%= a_classification.family_description %>
+        </td>
+
+        <td>
+          <%= a_classification.rule %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_classification.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_classification.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/classifications/<%= a_classification.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new classification
+    </h2>
+
+    <form action="/insert_classification" method="post">
+      <div>
+        <label for="family_description_box">
+          Family description
+        </label>
+
+        <input type="text" id="family_description_box" name="query_family_description">
+      </div>
+
+      <div>
+        <label for="rule_box">
+          Classification pricing factor
+        </label>
+
+        <input type="text" id="rule_box" name="query_rule">
+      </div>
+
+      <button>
+        Create classification
+      </button>
+    </form>
+  </div>
+</div>
